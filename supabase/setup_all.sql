@@ -319,7 +319,8 @@ VALUES
   ('c1000000-0000-0000-0000-000000000002', 'refrigerators', 'Refrigerators', 'ទូរទឹកកក', 2, true),
   ('c1000000-0000-0000-0000-000000000003', 'washing-machines', 'Washing Machines', 'ម៉ាស៊ីនបោកគក់', 3, true),
   ('c1000000-0000-0000-0000-000000000004', 'televisions', 'Televisions', 'ទូរទស្សន៍', 4, true),
-  ('c1000000-0000-0000-0000-000000000005', 'kitchen-appliances', 'Kitchen Appliances', 'ឧបករណ៍ផ្ទះបាយ', 5, true)
+  ('c1000000-0000-0000-0000-000000000005', 'kitchen-appliances', 'Kitchen Appliances', 'ឧបករណ៍ផ្ទះបាយ', 5, true),
+  ('c1000000-0000-0000-0000-000000000006', 'dryers', 'Dryers', 'ម៉ាស៊ីនសម្ងួត', 6, true)
 ON CONFLICT (slug) DO UPDATE
 SET
   name_en = EXCLUDED.name_en,

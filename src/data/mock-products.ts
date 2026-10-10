@@ -60,6 +60,16 @@ export const MOCK_CATEGORIES: Category[] = [
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
   },
+  {
+    id: "c1000000-0000-0000-0000-000000000006",
+    slug: "dryers",
+    name_en: "Dryers",
+    name_km: "ម៉ាស៊ីនសម្ងួត",
+    display_order: 6,
+    is_active: true,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
 ];
 
 // SVG appliance graphic generators for crisp, self-contained presentation

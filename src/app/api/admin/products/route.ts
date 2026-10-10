@@ -37,6 +37,9 @@ export async function POST(request: Request) {
       "televisions": "c1000000-0000-0000-0000-000000000004",
       "cat-kitchen": "c1000000-0000-0000-0000-000000000005",
       "kitchen-appliances": "c1000000-0000-0000-0000-000000000005",
+      "cat-dryer": "c1000000-0000-0000-0000-000000000006",
+      "dryers": "c1000000-0000-0000-0000-000000000006",
+      "dryer": "c1000000-0000-0000-0000-000000000006",
     };
 
     if (MOCK_MAP[resolvedCategoryId]) {
