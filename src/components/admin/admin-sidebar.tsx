@@ -23,6 +23,14 @@ export function AdminSidebar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
+    const match = document.cookie.match(/dad_staff_email=([^;]+)/);
+    if (match && match[1]) {
+      const savedEmail = decodeURIComponent(match[1]);
+      // Use requestAnimationFrame to avoid synchronous state update in effect
+      requestAnimationFrame(() => setUserEmail(savedEmail));
+      return;
+    }
+
     const supabase = createClient();
     supabase.auth.getUser().then(({ data: { user } }) => {
       if (user?.email) {
@@ -33,6 +41,7 @@ export function AdminSidebar() {
 
   const handleSignOut = async () => {
     document.cookie = "dad_staff_session=; path=/; max-age=0;";
+    document.cookie = "dad_staff_email=; path=/; max-age=0;";
     try {
       const supabase = createClient();
       await supabase.auth.signOut();

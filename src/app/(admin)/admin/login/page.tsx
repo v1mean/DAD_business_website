@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { createClient } from "@/lib/supabase/client";
 import { Shield, ArrowRight, AlertCircle, ArrowLeft } from "lucide-react";
 
 export default function AdminLoginPage() {
@@ -13,11 +12,6 @@ export default function AdminLoginPage() {
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-  const setStaffSessionCookie = () => {
-    document.cookie =
-      "dad_staff_session=authenticated; path=/; max-age=86400; SameSite=Lax";
-  };
-
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -25,44 +19,23 @@ export default function AdminLoginPage() {
 
     const cleanEmail = email.trim().toLowerCase();
 
-    // Support dev/demo admin credentials immediately
-    if (
-      cleanEmail === "admin@dadelectronics.com" &&
-      password === "AdminPassword123!"
-    ) {
-      setStaffSessionCookie();
-      try {
-        const supabase = createClient();
-        await supabase.auth.signInWithPassword({
-          email: cleanEmail,
-          password,
-        });
-      } catch {
-        // ignore
-      }
-      router.push("/admin");
-      router.refresh();
-      return;
-    }
-
     try {
-      const supabase = createClient();
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email: cleanEmail,
-        password,
+      const res = await fetch("/api/admin/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: cleanEmail, password }),
       });
 
-      if (error) {
-        setErrorMsg(error.message);
+      const data = await res.json();
+
+      if (!res.ok || !data.success) {
+        setErrorMsg(data.error || "Invalid staff credentials.");
         setLoading(false);
         return;
       }
 
-      if (data.user) {
-        setStaffSessionCookie();
-        router.push("/admin");
-        router.refresh();
-      }
+      router.push("/admin");
+      router.refresh();
     } catch (err: unknown) {
       const message =
         err instanceof Error
@@ -76,16 +49,27 @@ export default function AdminLoginPage() {
   const handleDemoSignIn = async () => {
     setLoading(true);
     setErrorMsg(null);
-    setStaffSessionCookie();
     try {
-      const supabase = createClient();
-      await supabase.auth.signInWithPassword({
-        email: "admin@dadelectronics.com",
-        password: "AdminPassword123!",
+      const res = await fetch("/api/admin/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: "admin@dadelectronics.com",
+          password: "AdminPassword123!",
+        }),
       });
+      const data = await res.json();
+      if (data.success) {
+        router.push("/admin");
+        router.refresh();
+        return;
+      }
     } catch {
       // ignore
     }
+    // Fallback direct access in dev
+    document.cookie =
+      "dad_staff_session=authenticated; path=/; max-age=86400; SameSite=Lax";
     router.push("/admin");
     router.refresh();
   };
