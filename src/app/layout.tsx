@@ -25,6 +25,12 @@ export const metadata: Metadata = {
   },
   description:
     "Browse our catalog of washing machines, refrigerators, air conditioners, televisions, and more.",
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+    apple: "/apple-icon.png",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
