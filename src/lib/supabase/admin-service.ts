@@ -205,114 +205,18 @@ export async function getAdminProductById(
  */
 export async function saveProduct(input: SaveProductInput): Promise<{ success: boolean; productId?: string; error?: string }> {
   try {
-    const supabase = createClient();
+    const res = await fetch("/api/admin/products", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(input),
+    });
 
-    // 1. Upsert core product
-    const productPayload = {
-      slug: input.slug.trim(),
-      brand: input.brand.trim(),
-      model_number: input.model_number.trim(),
-      category_id: input.category_id,
-      origin_country: input.origin_country || null,
-      release_year: input.release_year || null,
-      price: input.price !== undefined && input.price !== null ? input.price : null,
-      currency: input.currency || "USD",
-      show_price: input.show_price,
-      status: input.status,
-    };
-
-    let productId = input.id;
-
-    if (productId) {
-      // Update existing
-      const { error: prodError } = await supabase
-        .from("products")
-        .update(productPayload)
-        .eq("id", productId);
-      if (prodError) throw prodError;
-    } else {
-      // Insert new
-      const { data: newProd, error: prodError } = await supabase
-        .from("products")
-        .insert(productPayload)
-        .select("id")
-        .single();
-      if (prodError) throw prodError;
-      productId = newProd.id;
+    const data = await res.json();
+    if (!res.ok || !data.success) {
+      return { success: false, error: data.error || "Failed to save product" };
     }
 
-    // 2. Upsert English and Khmer translations
-    const translationsToUpsert = [
-      {
-        product_id: productId,
-        locale: "en",
-        name: input.translations.en.name.trim(),
-        description: input.translations.en.description.trim(),
-        warranty_text: input.translations.en.warranty_text || null,
-      },
-      {
-        product_id: productId,
-        locale: "km",
-        name: input.translations.km.name.trim(),
-        description: input.translations.km.description.trim(),
-        warranty_text: input.translations.km.warranty_text || null,
-      },
-    ];
-
-    const { error: transError } = await supabase
-      .from("product_translations")
-      .upsert(translationsToUpsert, { onConflict: "product_id,locale" });
-
-    if (transError) throw transError;
-
-    // 3. Replace specifications
-    if (productId) {
-      await supabase
-        .from("product_specifications")
-        .delete()
-        .eq("product_id", productId);
-
-      if (input.specifications.length > 0) {
-        const specsToInsert = input.specifications.map((spec, index) => ({
-          product_id: productId,
-          spec_key: spec.spec_key.trim(),
-          value_text: spec.value_text || null,
-          value_numeric: spec.value_numeric || null,
-          unit: spec.unit || null,
-          display_order: index + 1,
-          source_note: spec.source_note || null,
-          verification_status: spec.verification_status,
-        }));
-
-        const { error: specsError } = await supabase
-          .from("product_specifications")
-          .insert(specsToInsert);
-
-        if (specsError) throw specsError;
-      }
-    }
-
-    // 4. Update or replace product image
-    if (productId && input.image_url) {
-      await supabase
-        .from("product_images")
-        .delete()
-        .eq("product_id", productId);
-
-      const { error: imgError } = await supabase
-        .from("product_images")
-        .insert({
-          product_id: productId,
-          storage_path: input.image_url,
-          alt_text_en: input.translations.en.name,
-          alt_text_km: input.translations.km.name,
-          display_order: 1,
-        });
-
-      if (imgError) console.warn("Notice updating product image:", imgError);
-    }
-
-    return { success: true, productId };
+    return { success: true, productId: data.productId };
   } catch (err: unknown) {
     console.error("Error saving product:", err);
     const message = err instanceof Error ? err.message : "Failed to save product";
@@ -328,13 +232,17 @@ export async function updateProductStatus(
   status: ProductStatus
 ): Promise<{ success: boolean; error?: string }> {
   try {
-    const supabase = createClient();
-    const { error } = await supabase
-      .from("products")
-      .update({ status })
-      .eq("id", id);
+    const res = await fetch("/api/admin/products", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id, status }),
+    });
 
-    if (error) throw error;
+    const data = await res.json();
+    if (!res.ok || !data.success) {
+      return { success: false, error: data.error || "Failed to update status" };
+    }
+
     return { success: true };
   } catch (err: unknown) {
     console.error("Error updating product status:", err);
@@ -348,13 +256,15 @@ export async function updateProductStatus(
  */
 export async function deleteProduct(id: string): Promise<{ success: boolean; error?: string }> {
   try {
-    const supabase = createClient();
-    const { error } = await supabase
-      .from("products")
-      .delete()
-      .eq("id", id);
+    const res = await fetch(`/api/admin/products?id=${encodeURIComponent(id)}`, {
+      method: "DELETE",
+    });
 
-    if (error) throw error;
+    const data = await res.json();
+    if (!res.ok || !data.success) {
+      return { success: false, error: data.error || "Failed to delete product" };
+    }
+
     return { success: true };
   } catch (err: unknown) {
     console.error("Error deleting product:", err);
@@ -370,28 +280,20 @@ export async function uploadProductImage(
   file: File
 ): Promise<{ success: boolean; url?: string; error?: string }> {
   try {
-    const supabase = createClient();
-    const fileExt = file.name.split(".").pop() || "jpg";
-    const fileName = `${Date.now()}-${Math.random().toString(36).substring(2, 9)}.${fileExt}`;
-    const filePath = `appliances/${fileName}`;
+    const formData = new FormData();
+    formData.append("file", file);
 
-    const { error: uploadError } = await supabase.storage
-      .from("product-images")
-      .upload(filePath, file, {
-        cacheControl: "3600",
-        upsert: false,
-      });
+    const res = await fetch("/api/admin/upload", {
+      method: "POST",
+      body: formData,
+    });
 
-    if (uploadError) {
-      console.warn("Storage upload error:", uploadError);
-      return { success: false, error: uploadError.message };
+    const data = await res.json();
+    if (!res.ok || !data.success) {
+      return { success: false, error: data.error || "Failed to upload image" };
     }
 
-    const {
-      data: { publicUrl },
-    } = supabase.storage.from("product-images").getPublicUrl(filePath);
-
-    return { success: true, url: publicUrl };
+    return { success: true, url: data.url };
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : "Failed to upload image";
     return { success: false, error: message };
