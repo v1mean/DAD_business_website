@@ -4,11 +4,11 @@ import { CatalogExplorer } from "@/components/catalog/catalog-explorer";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "All Products — Electronics & Appliances | DAD Electronics",
+  title: "All Products — Electronics & Appliances | Washy",
   description:
-    "Browse verified inventory of washing machines, refrigerators, air conditioners, and TVs with official specifications and pricing.",
+    "Browse verified inventory of washing machines, dryers, refrigerators, air conditioners, and TVs with official specifications and pricing.",
   openGraph: {
-    title: "Product Catalog | DAD Electronics",
+    title: "Product Catalog | Washy",
     description: "Explore our curated showroom catalog with instant QR access and verified specs.",
   },
 };

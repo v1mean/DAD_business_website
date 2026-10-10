@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useLanguage } from "@/context/language-context";
 import { getTelegramUsername } from "@/lib/telegram";
 import { MOCK_CATEGORIES } from "@/data/mock-products";
@@ -17,12 +18,16 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
           {/* Col 1: Brand Info */}
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <span className="flex h-7 w-7 items-center justify-center rounded-[6px] bg-[#0066cc] text-[12px] font-bold text-white">
-                DAD
-              </span>
-              <span className="text-[17px] font-semibold tracking-tight text-[#1d1d1f]">
-                DAD Electronics
+            <div className="flex items-center gap-2.5 mb-4">
+              <Image
+                src="/logo.png"
+                alt="Washy"
+                width={32}
+                height={32}
+                className="rounded-[7px] object-contain"
+              />
+              <span className="text-[18px] font-semibold tracking-tight text-[#1d1d1f]">
+                Washy
               </span>
             </div>
             <p className="text-[14px] leading-relaxed text-[#7a7a7a]">

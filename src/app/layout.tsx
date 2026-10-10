@@ -20,15 +20,13 @@ const notoSansKhmer = Noto_Sans_Khmer({
 
 export const metadata: Metadata = {
   title: {
-    default: "DAD Electronics — Product Catalog",
-    template: "%s | DAD Electronics",
+    default: "Washy — Electronics & Appliances Catalog",
+    template: "%s | Washy",
   },
   description:
-    "Browse our catalog of washing machines, refrigerators, air conditioners, televisions, and more.",
+    "Browse our catalog of washing machines, dryers, refrigerators, air conditioners, televisions, and more.",
   icons: {
-    icon: [
-      { url: "/icon.svg", type: "image/svg+xml" },
-    ],
+    icon: "/icon.png",
     apple: "/apple-icon.png",
   },
 };

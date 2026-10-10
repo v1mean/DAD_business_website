@@ -90,17 +90,17 @@ const translations: Record<Locale, Record<string, string>> = {
     "detail.related_subtitle": "Compare specifications with alternative models",
 
     // Telegram Pre-fill message
-    "telegram.inquiry_prefix": "Hello DAD Electronics, I would like to inquire about",
+    "telegram.inquiry_prefix": "Hello Washy, I would like to inquire about",
     "telegram.model_label": "Model",
 
     // Footer
-    "footer.desc": "Your trusted electronics destination in Phnom Penh, Cambodia. Providing authenticated home appliances, verified specifications, and direct customer support.",
+    "footer.desc": "Your trusted appliances & electronics showroom in Phnom Penh, Cambodia. Providing authenticated home appliances, verified specifications, and direct customer support.",
     "footer.quick_links": "Quick Links",
     "footer.categories": "Categories",
     "footer.contact": "Store & Contact",
     "footer.address": "Phnom Penh, Kingdom of Cambodia",
     "footer.hours": "Mon - Sun: 8:00 AM - 7:00 PM",
-    "footer.rights": "All rights reserved. DAD Electronics QR Catalog.",
+    "footer.rights": "All rights reserved. Washy Appliance Catalog.",
     "footer.legal": "Specifications are verified against official manufacturer documentation.",
   },
   km: {
@@ -181,17 +181,17 @@ const translations: Record<Locale, Record<string, string>> = {
     "detail.related_subtitle": "ប្រៀបធៀបលក្ខណៈបច្ចេកទេសជាមួយម៉ូដែលផ្សេងៗ",
 
     // Telegram Pre-fill message
-    "telegram.inquiry_prefix": "សួស្តី DAD Electronics ខ្ញុំចង់សាកសួរព័ត៌មានបន្ថែមអំពី",
+    "telegram.inquiry_prefix": "សួស្តី Washy ខ្ញុំចង់សាកសួរព័ត៌មានបន្ថែមអំពី",
     "telegram.model_label": "ម៉ូដែល",
 
     // Footer
-    "footer.desc": "ទីតាំងឧបករណ៍អេឡិចត្រូនិកទំនើប និងគួរឱ្យទុកចិត្តនៅរាជធានីភ្នំពេញ។ ផ្តល់ជូនផលិតផលសុទ្ធ លក្ខណៈបច្ចេកទេសពិត និងសេវាបំរើអតិថិជនរហ័ស។",
+    "footer.desc": "ទីតាំងឧបករណ៍អេឡិចត្រូនិក និងគ្រឿងប្រើប្រាស់ក្នុងផ្ទះទំនើប គួរឱ្យទុកចិត្តនៅរាជធានីភ្នំពេញ។ ផ្តល់ជូនផលិតផលសុទ្ធ លក្ខណៈបច្ចេកទេសពិត និងសេវាបំរើអតិថិជនរហ័ស។",
     "footer.quick_links": "តំណភ្ជាប់រហ័ស",
     "footer.categories": "ប្រភេទផលិតផល",
     "footer.contact": "ទំនាក់ទំនង និងហាង",
     "footer.address": "រាជធានីភ្នំពេញ ព្រះរាជាណាចក្រកម្ពុជា",
     "footer.hours": "ចន្ទ - អាទិត្យ៖ ៨:០០ ព្រឹក - ៧:០០ យប់",
-    "footer.rights": "រក្សាសិទ្ធិគ្រប់យ៉ាង។ កាតាឡុកអេឡិចត្រូនិក DAD Electronics។",
+    "footer.rights": "រក្សាសិទ្ធិគ្រប់យ៉ាង។ កាតាឡុកផលិតផល Washy។",
     "footer.legal": "លក្ខណៈបច្ចេកទេសទាំងអស់ត្រូវបានផ្ទៀងផ្ទាត់ជាមួយឯកសារផ្លូវការរបស់រោងចក្រ។",
   },
 };

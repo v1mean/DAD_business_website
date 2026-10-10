@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import {
@@ -85,12 +86,16 @@ export function AdminSidebar() {
         {/* Brand Header */}
         <div className="flex items-center justify-between px-3 py-4 border-b border-[#f0f0f0]">
           <Link href="/admin" className="flex items-center gap-2.5">
-            <span className="flex h-7 w-7 items-center justify-center rounded-[6px] bg-[#0066cc] text-[12px] font-bold text-white">
-              DAD
-            </span>
+            <Image
+              src="/logo.png"
+              alt="Washy"
+              width={30}
+              height={30}
+              className="rounded-[6px] object-contain"
+            />
             <div>
-              <span className="text-[14px] font-semibold tracking-tight text-[#1d1d1f] block leading-tight">
-                DAD Electronics
+              <span className="text-[15px] font-semibold tracking-tight text-[#1d1d1f] block leading-tight">
+                Washy
               </span>
               <span className="text-[11px] text-[#7a7a7a] flex items-center gap-1">
                 <Shield className="h-3 w-3 text-[#0066cc]" />
@@ -174,11 +179,15 @@ export function AdminSidebar() {
       {/* Mobile Top Bar with Hamburger */}
       <div className="md:hidden flex items-center justify-between bg-white border-b border-[#e0e0e0] px-4 py-3 sticky top-0 z-40">
         <div className="flex items-center gap-2">
-          <span className="flex h-6 w-6 items-center justify-center rounded-[5px] bg-[#0066cc] text-[11px] font-bold text-white">
-            DAD
-          </span>
+          <Image
+            src="/logo.png"
+            alt="Washy"
+            width={24}
+            height={24}
+            className="rounded-[5px] object-contain"
+          />
           <span className="text-[14px] font-semibold text-[#1d1d1f]">
-            Staff Admin
+            Washy Admin
           </span>
         </div>
         <button

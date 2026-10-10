@@ -4,11 +4,11 @@ import { HomeView } from "@/components/home/home-view";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "DAD Electronics — Official Electronics & Home Appliance Catalog",
+  title: "Washy — Official Home Appliance & Electronics Catalog",
   description:
-    "Explore our showroom inventory of washing machines, refrigerators, air conditioners, and TVs with verified technical specifications and instant QR code access.",
+    "Explore our showroom inventory of washing machines, dryers, refrigerators, air conditioners, and TVs with verified technical specifications and instant QR code access.",
   openGraph: {
-    title: "DAD Electronics Showroom",
+    title: "Washy Appliance Showroom",
     description: "Curated home appliances with verified specifications and instant QR scanning.",
   },
 };

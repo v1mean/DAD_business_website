@@ -17,7 +17,7 @@ export async function generateMetadata({
 
   if (!product) {
     return {
-      title: "Product Not Found | DAD Electronics",
+      title: "Product Not Found | Washy",
       description: "The requested appliance catalog entry could not be found.",
     };
   }
@@ -27,13 +27,13 @@ export async function generateMetadata({
   const productName = enTrans?.name || `${product.brand} ${product.model_number}`;
 
   return {
-    title: `${productName} — ${product.brand} ${product.model_number} | DAD Electronics`,
+    title: `${productName} — ${product.brand} ${product.model_number} | Washy`,
     description:
       enTrans?.description?.slice(0, 160) ||
       kmTrans?.description?.slice(0, 160) ||
       `Official verified specifications, showroom warranty, and availability for ${productName}.`,
     openGraph: {
-      title: `${productName} | DAD Electronics Showroom`,
+      title: `${productName} | Washy Showroom`,
       description: `Official specifications and showroom availability for ${product.brand} ${product.model_number}.`,
     },
   };

@@ -3,7 +3,8 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Shield, ArrowRight, AlertCircle, ArrowLeft } from "lucide-react";
+import Image from "next/image";
+import { ArrowRight, AlertCircle, ArrowLeft } from "lucide-react";
 
 export default function AdminLoginPage() {
   const router = useRouter();
@@ -79,11 +80,17 @@ export default function AdminLoginPage() {
       <div className="w-full max-w-[420px] rounded-[18px] border border-[#e0e0e0] bg-[#ffffff] p-8">
         {/* Brand Header */}
         <div className="text-center mb-8">
-          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-[10px] bg-[#0066cc] text-white mb-4">
-            <Shield className="h-6 w-6" />
+          <div className="mx-auto mb-4 flex justify-center">
+            <Image
+              src="/logo.png"
+              alt="Washy"
+              width={64}
+              height={64}
+              className="rounded-[16px] object-contain shadow-sm"
+            />
           </div>
           <h1 className="text-[24px] font-semibold text-[#1d1d1f] tracking-tight">
-            DAD Electronics Admin
+            Washy Admin
           </h1>
           <p className="mt-1 text-[14px] text-[#7a7a7a]">
             Staff credentials required to manage product catalog

@@ -18,7 +18,7 @@ export async function generateMetadata({
     product?.model_number ||
     "Product";
   return {
-    title: `Edit ${name} | DAD Electronics Admin`,
+    title: `Edit ${name} | Washy Admin`,
     description: `Manage specifications, price visibility, and translations for ${name}.`,
   };
 }

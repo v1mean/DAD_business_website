@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useLanguage } from "@/context/language-context";
+import Image from "next/image";
 import { Send, Menu, X, Shield, Globe } from "lucide-react";
 import { getTelegramUsername } from "@/lib/telegram";
 
@@ -27,11 +28,15 @@ export function GlobalNav() {
             href="/"
             className="flex items-center gap-2 text-white hover:text-white/80 transition-colors"
           >
-            <span className="flex h-6 w-6 items-center justify-center rounded-[6px] bg-[#0066cc] text-[11px] font-bold text-white tracking-tight">
-              DAD
-            </span>
-            <span className="text-[13px] font-semibold tracking-tight text-white">
-              DAD Electronics
+            <Image
+              src="/logo.png"
+              alt="Washy"
+              width={26}
+              height={26}
+              className="rounded-[6px] object-contain"
+            />
+            <span className="text-[14px] font-semibold tracking-tight text-white">
+              Washy
             </span>
           </Link>
         </div>

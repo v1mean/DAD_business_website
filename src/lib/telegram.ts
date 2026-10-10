@@ -22,8 +22,8 @@ export function buildTelegramInquiryUrl({
   
   const text =
     locale === "km"
-      ? `សួស្តី DAD Electronics! ខ្ញុំចង់សាកសួរព័ត៌មានបន្ថែម និងតម្លៃអំពីផលិតផល:\n📦 ម៉ូដែល: ${modelNumber}\n🏷️ ឈ្មោះ: ${productName}`
-      : `Hello DAD Electronics! I would like to inquire about this appliance:\n📦 Model: ${modelNumber}\n🏷️ Name: ${productName}`;
+      ? `សួស្តី Washy! ខ្ញុំចង់សាកសួរព័ត៌មានបន្ថែម និងតម្លៃអំពីផលិតផល:\n📦 ម៉ូដែល: ${modelNumber}\n🏷️ ឈ្មោះ: ${productName}`
+      : `Hello Washy! I would like to inquire about this appliance:\n📦 Model: ${modelNumber}\n🏷️ Name: ${productName}`;
 
   return `https://t.me/${username}?text=${encodeURIComponent(text)}`;
 }

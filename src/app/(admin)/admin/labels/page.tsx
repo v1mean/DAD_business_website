@@ -4,7 +4,7 @@ import { BatchLabelsView } from "@/components/admin/batch-labels-view";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Print Showroom QR Labels | DAD Electronics Admin",
+  title: "Print Showroom QR Labels | Washy Admin",
   description: "Batch export and print QR code display cards for physical showroom appliances.",
 };
 

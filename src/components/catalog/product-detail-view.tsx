@@ -200,7 +200,7 @@ export function ProductDetailView({ product }: ProductDetailViewProps) {
               </a>
 
               <p className="text-center text-[12px] text-[#7a7a7a]">
-                Direct live chat with DAD Electronics sales desk (@{telegramUsername})
+                Direct live chat with Washy sales desk (@{telegramUsername})
               </p>
             </div>
 

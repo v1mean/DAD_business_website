@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import type { ProductWithDetails } from "@/types/database";
 import { getProductDestinationUrl, generateQrDataUrl } from "@/lib/qr";
 import { MOCK_CATEGORIES } from "@/data/mock-products";
@@ -124,9 +125,15 @@ export function BatchLabelsView({ products }: BatchLabelsViewProps) {
                 {/* Header */}
                 <div className="flex items-center justify-between border-b-2 border-[#1d1d1f] pb-3 mb-4">
                   <div className="flex items-center gap-2">
-                    <div className="h-3 w-3 rounded-full bg-[#0066cc]" />
+                    <Image
+                      src="/logo.png"
+                      alt="Washy"
+                      width={22}
+                      height={22}
+                      className="rounded-[4px] object-contain"
+                    />
                     <span className="text-[15px] font-bold tracking-tight uppercase">
-                      DAD Electronics
+                      Washy
                     </span>
                   </div>
                   <span className="text-[10px] font-mono uppercase tracking-wider text-[#7a7a7a]">

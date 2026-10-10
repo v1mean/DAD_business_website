@@ -3,7 +3,7 @@ import { ProductForm } from "@/components/admin/product-form";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Add New Product | DAD Electronics Admin",
+  title: "Add New Product | Washy Admin",
   description: "Create and publish a new appliance product with bilingual specs.",
 };
 
