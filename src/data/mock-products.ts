@@ -11,7 +11,7 @@ export interface MockProductWithDetails extends ProductWithDetails {
 
 export const MOCK_CATEGORIES: Category[] = [
   {
-    id: "cat-ac",
+    id: "c1000000-0000-0000-0000-000000000001",
     slug: "air-conditioners",
     name_en: "Air Conditioners",
     name_km: "ម៉ាស៊ីនត្រជាក់",
@@ -21,7 +21,7 @@ export const MOCK_CATEGORIES: Category[] = [
     updated_at: new Date().toISOString(),
   },
   {
-    id: "cat-fridge",
+    id: "c1000000-0000-0000-0000-000000000002",
     slug: "refrigerators",
     name_en: "Refrigerators",
     name_km: "ទូរទឹកកក",
@@ -31,7 +31,7 @@ export const MOCK_CATEGORIES: Category[] = [
     updated_at: new Date().toISOString(),
   },
   {
-    id: "cat-washer",
+    id: "c1000000-0000-0000-0000-000000000003",
     slug: "washing-machines",
     name_en: "Washing Machines",
     name_km: "ម៉ាស៊ីនបោកគក់",
@@ -41,7 +41,7 @@ export const MOCK_CATEGORIES: Category[] = [
     updated_at: new Date().toISOString(),
   },
   {
-    id: "cat-tv",
+    id: "c1000000-0000-0000-0000-000000000004",
     slug: "televisions",
     name_en: "Televisions",
     name_km: "ទូរទស្សន៍",
@@ -51,7 +51,7 @@ export const MOCK_CATEGORIES: Category[] = [
     updated_at: new Date().toISOString(),
   },
   {
-    id: "cat-kitchen",
+    id: "c1000000-0000-0000-0000-000000000005",
     slug: "kitchen-appliances",
     name_en: "Kitchen Appliances",
     name_km: "ឧបករណ៍ផ្ទះបាយ",

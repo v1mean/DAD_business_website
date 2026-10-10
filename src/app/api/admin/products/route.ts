@@ -24,12 +24,55 @@ export async function POST(request: Request) {
     const input: SaveProductInput = await request.json();
     const supabase = createAdminClient();
 
+    // Resolve category_id if it's a mock ID or slug
+    let resolvedCategoryId = input.category_id;
+    const MOCK_MAP: Record<string, string> = {
+      "cat-ac": "c1000000-0000-0000-0000-000000000001",
+      "air-conditioners": "c1000000-0000-0000-0000-000000000001",
+      "cat-fridge": "c1000000-0000-0000-0000-000000000002",
+      "refrigerators": "c1000000-0000-0000-0000-000000000002",
+      "cat-washer": "c1000000-0000-0000-0000-000000000003",
+      "washing-machines": "c1000000-0000-0000-0000-000000000003",
+      "cat-tv": "c1000000-0000-0000-0000-000000000004",
+      "televisions": "c1000000-0000-0000-0000-000000000004",
+      "cat-kitchen": "c1000000-0000-0000-0000-000000000005",
+      "kitchen-appliances": "c1000000-0000-0000-0000-000000000005",
+    };
+
+    if (MOCK_MAP[resolvedCategoryId]) {
+      resolvedCategoryId = MOCK_MAP[resolvedCategoryId];
+    } else {
+      const isUuid =
+        /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(
+          resolvedCategoryId
+        );
+      if (!isUuid) {
+        const { data: catData } = await supabase
+          .from("categories")
+          .select("id")
+          .eq("slug", resolvedCategoryId)
+          .single();
+        if (catData?.id) {
+          resolvedCategoryId = catData.id;
+        } else {
+          const { data: firstCat } = await supabase
+            .from("categories")
+            .select("id")
+            .limit(1)
+            .single();
+          if (firstCat?.id) {
+            resolvedCategoryId = firstCat.id;
+          }
+        }
+      }
+    }
+
     // 1. Prepare product payload
     const productPayload = {
       slug: input.slug.trim(),
       brand: input.brand.trim(),
       model_number: input.model_number.trim(),
-      category_id: input.category_id,
+      category_id: resolvedCategoryId,
       origin_country: input.origin_country || null,
       release_year: input.release_year || null,
       price:
@@ -133,8 +176,14 @@ export async function POST(request: Request) {
     return NextResponse.json({ success: true, productId });
   } catch (err: unknown) {
     console.error("Server error saving product:", err);
-    const message =
-      err instanceof Error ? err.message : "Failed to save product.";
+    let message = "Failed to save product.";
+    if (err && typeof err === "object") {
+      if ("message" in err && typeof err.message === "string") {
+        message = err.message;
+      } else if (err instanceof Error) {
+        message = err.message;
+      }
+    }
     return NextResponse.json(
       { success: false, error: message },
       { status: 500 }

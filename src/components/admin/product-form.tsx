@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { saveProduct, type SaveProductInput } from "@/lib/supabase/admin-service";
-import type { ProductWithDetails, ProductStatus } from "@/types/database";
+import type { ProductWithDetails, ProductStatus, Category } from "@/types/database";
 import { MOCK_CATEGORIES } from "@/data/mock-products";
+import { createClient } from "@/lib/supabase/client";
 import {
   ArrowLeft,
   Save,
@@ -33,9 +34,36 @@ export function ProductForm({ initialData }: ProductFormProps) {
   const [brand, setBrand] = useState(initialData?.brand || "");
   const [modelNumber, setModelNumber] = useState(initialData?.model_number || "");
   const [slug, setSlug] = useState(initialData?.slug || "");
+  const [categories, setCategories] = useState<Category[]>(MOCK_CATEGORIES);
   const [categoryId, setCategoryId] = useState(
     initialData?.category_id || MOCK_CATEGORIES[0].id
   );
+
+  useEffect(() => {
+    let ignore = false;
+    const fetchCats = async () => {
+      try {
+        const supabase = createClient();
+        const { data, error } = await supabase
+          .from("categories")
+          .select("*")
+          .order("display_order", { ascending: true });
+        if (!error && data && data.length > 0 && !ignore) {
+          setCategories(data);
+          if (!initialData) {
+            setCategoryId((prev) => (prev ? prev : data[0].id));
+          }
+        }
+      } catch {
+        // use fallback mock categories
+      }
+    };
+    fetchCats();
+    return () => {
+      ignore = true;
+    };
+  }, [initialData]);
+
   const [originCountry, setOriginCountry] = useState(
     initialData?.origin_country || ""
   );
@@ -381,7 +409,7 @@ export function ProductForm({ initialData }: ProductFormProps) {
               onChange={(e) => setCategoryId(e.target.value)}
               className="h-[42px] w-full rounded-[10px] border border-[#e0e0e0] bg-white px-3.5 text-[14px] text-[#1d1d1f] focus:border-[#0066cc] focus:outline-none"
             >
-              {MOCK_CATEGORIES.map((cat) => (
+              {categories.map((cat) => (
                 <option key={cat.id} value={cat.id}>
                   {cat.name_en} ({cat.name_km})
                 </option>
