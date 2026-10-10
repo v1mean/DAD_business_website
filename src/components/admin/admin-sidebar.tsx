@@ -91,7 +91,7 @@ export function AdminSidebar() {
               alt="Washy"
               width={30}
               height={30}
-              className="rounded-[6px] object-contain"
+              className="object-contain"
             />
             <div>
               <span className="text-[15px] font-semibold tracking-tight text-[#1d1d1f] block leading-tight">
@@ -184,7 +184,7 @@ export function AdminSidebar() {
             alt="Washy"
             width={24}
             height={24}
-            className="rounded-[5px] object-contain"
+            className="object-contain"
           />
           <span className="text-[14px] font-semibold text-[#1d1d1f]">
             Washy Admin

@@ -24,7 +24,7 @@ export function Footer() {
                 alt="Washy"
                 width={32}
                 height={32}
-                className="rounded-[7px] object-contain"
+                className="object-contain"
               />
               <span className="text-[18px] font-semibold tracking-tight text-[#1d1d1f]">
                 Washy

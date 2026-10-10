@@ -33,7 +33,7 @@ export function GlobalNav() {
               alt="Washy"
               width={26}
               height={26}
-              className="rounded-[6px] object-contain"
+              className="object-contain"
             />
             <span className="text-[14px] font-semibold tracking-tight text-white">
               Washy

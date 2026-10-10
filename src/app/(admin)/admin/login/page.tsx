@@ -86,7 +86,7 @@ export default function AdminLoginPage() {
               alt="Washy"
               width={64}
               height={64}
-              className="rounded-[16px] object-contain shadow-sm"
+              className="object-contain"
             />
           </div>
           <h1 className="text-[24px] font-semibold text-[#1d1d1f] tracking-tight">
